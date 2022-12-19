@@ -26,6 +26,31 @@ router.post("/comments", async (req, res) => {
 });
 
 
+// 모드 게시글의 등록된 모든 댓글 목록 조회 API
+router.get("/comments", async (req, res) => {
+  const dbData = await Comments.find({ }).sort({ dateCreated: -1 });  
+  // 내림차순 정렬
+
+  if (!dbData.length) {
+    return res.status(404).json({ 
+      success: false,
+      errorMessage: "등록된 댓글이 없습니다."
+    });
+  } 
+
+  let result = []
+  for (const Comment of dbData) {
+    const postsId = Comment['postsId']
+    const commentsId = Comment['commentsId']
+    const author = Comment['author']
+    const dateCreated = Comment['dateCreated']
+    const comment = Comment['comment']
+    result.push({postsId, commentsId, author, dateCreated, comment})
+  }
+  res.status(200).json({ result })
+})
+
+
 // 조회하는 게시글의 전체 댓글 목록 조회 API
 router.get("/comments/:postsId", async (req, res) => {
   const { postsId } = req.params
