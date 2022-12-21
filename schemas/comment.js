@@ -22,7 +22,7 @@ const commentsSchema = new mongoose.Schema({
     unique: false
   },
   dateCreated: {
-    type: String,
+    type: Date,     // 변경: String -> Date 
     required: true,
     unique: false
   },

@@ -8,8 +8,6 @@ const port = 3000;
 const postsRouter = require('./routes/posts.js')
 const commentsRouter = require('./routes/comments.js')
 
-app.use(express.json());
-
 // app.post("/", (req, res) => {
 //   console.log(req.body)
 //   res.send(`기본 URI에 POST 메서드가 정상적으로 실행되었습니다. ${req.body["key1234"]}`)
